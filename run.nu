@@ -13,12 +13,12 @@ def list_probes [] {
 
 def debug [] {
     print "Build and Flash in Debug Mode..."
-    cargo run
+    sudo cargo run
 }
 
 def run [] {
     print "Build and Flash in Release Mode..."
-    cargo run --release
+    sudo cargo run --release
 }
 
 def main [...args] {

@@ -13,3 +13,6 @@ target/
 !.vscode/extensions.json
 !.vscode/settings.json
 scripts
+.direnv
+.direnv
+.direnv
