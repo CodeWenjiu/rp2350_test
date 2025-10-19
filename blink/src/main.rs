@@ -4,13 +4,15 @@
 #![no_std]
 #![no_main]
 
+macros::rp235x_binInit!();
+
 use boards::{clock_init, pin_init};
 use embedded_hal::digital::OutputPin;
 
-macros::rp235x_binInit!();
-
 #[entry]
 fn main() -> ! {
+    macros::heap_init!();
+
     info!("Program started");
 
     let pin = pin_init();

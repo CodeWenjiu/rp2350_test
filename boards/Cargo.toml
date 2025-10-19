@@ -14,3 +14,4 @@ macros = { path = "../macros" }
 cortex-m = { workspace = true }
 cortex-m-rt = { workspace = true }
 embedded-hal = { workspace = true }
+embedded-alloc = { workspace = true }

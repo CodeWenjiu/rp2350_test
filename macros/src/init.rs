@@ -41,6 +41,22 @@ macro_rules! rp235x_binInit {
             hal::binary_info::rp_program_build_attribute!(),
         ];
 
+        extern crate alloc;
+
+        use embedded_alloc::LlffHeap;
+        #[global_allocator]
+        static ALLOCATOR: LlffHeap = LlffHeap::empty();
+
         use hal::entry;
+    };
+}
+
+#[macro_export]
+macro_rules! heap_init {
+    [ ] => {
+        use core::mem::MaybeUninit;
+        const HEAP_SIZE: usize = 1024;
+        static mut HEAP: [MaybeUninit<u8>; HEAP_SIZE] = [MaybeUninit::uninit(); HEAP_SIZE];
+        unsafe { ALLOCATOR.init(core::ptr::addr_of_mut!(HEAP) as usize, HEAP_SIZE) }
     };
 }
