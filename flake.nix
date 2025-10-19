@@ -25,8 +25,9 @@
       in
       {
         devShells.default = pkgs.mkShell {
-          # you need to install it in systemLevel
-          propagatedBuildInputs = [ pkgs.probe-rs-tools ];
+          propagatedBuildInputs = [
+            pkgs.probe-rs-tools
+          ];
 
           buildInputs = [
             (pkgs.rust-bin.stable.latest.default.override {

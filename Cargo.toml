@@ -1,5 +1,8 @@
 [workspace]
-members = ["blink"]
+members = [
+    "blink",
+    "macros"
+]
 resolver = "2"
 
 # cargo build/run
@@ -52,6 +55,7 @@ embedded-hal = "1.0.0"
 defmt = "1"
 defmt-rtt = "1"
 panic-probe = { version = "1", features = ["print-defmt"] }
+# Can not yet using rp-pico cause it's not support rp235x for now
 rp235x-hal = { version = "0.3", features = [
     "rt",
     "critical-section-impl",
