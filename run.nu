@@ -13,12 +13,17 @@ def list_probes [] {
 
 def debug [] {
     print "Build and Flash in Debug Mode..."
-    sudo cargo run
+    cargo run
 }
 
 def run [] {
     print "Build and Flash in Release Mode..."
-    sudo cargo run --release
+    cargo run --release
+}
+
+def clean [] {
+    print "Cleaning project..."
+    cargo clean
 }
 
 def main [...args] {
@@ -32,6 +37,7 @@ def main [...args] {
         ["list"] => list_probes
         ["debug"] => debug
         ["run"] => run
+        ["clean"] => clean
         _ => {
             print "Unknown command, Script Usage:"
             help

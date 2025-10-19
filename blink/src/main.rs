@@ -4,7 +4,7 @@
 #![no_std]
 #![no_main]
 
-use boards::Board;
+use boards::{Board, ClockEnabled, PinEnabled};
 use embedded_hal::digital::OutputPin;
 
 macros::rp235x_binInit!();
@@ -13,7 +13,7 @@ macros::rp235x_binInit!();
 fn main() -> ! {
     info!("Program started");
 
-    let board = Board::take().unwrap();
+    let board = Board::<ClockEnabled, PinEnabled>::new();
     info!("Board initialized");
 
     let mut apin = board.pins.gpio25.into_push_pull_output();
