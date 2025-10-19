@@ -4,61 +4,28 @@
 #![no_std]
 #![no_main]
 
-macros::rp235x_binInit!();
-
+use boards::Board;
 use embedded_hal::digital::OutputPin;
-use hal::clocks::init_clocks_and_plls;
-use hal::entry;
-use hal::{Clock, pac};
+
+macros::rp235x_binInit!();
 
 #[entry]
 fn main() -> ! {
-    info!("Program start");
-    let mut pac = pac::Peripherals::take().unwrap();
-    let core = cortex_m::Peripherals::take().unwrap();
-    let mut watchdog = hal::Watchdog::new(pac.WATCHDOG);
-    let sio = hal::Sio::new(pac.SIO);
+    info!("Program started");
 
-    // External high-speed crystal on the pico board is 12Mhz
-    let external_xtal_freq_hz = 12_000_000u32;
-    let clocks = init_clocks_and_plls(
-        external_xtal_freq_hz,
-        pac.XOSC,
-        pac.CLOCKS,
-        pac.PLL_SYS,
-        pac.PLL_USB,
-        &mut pac.RESETS,
-        &mut watchdog,
-    )
-    .ok()
-    .unwrap();
+    let board = Board::take().unwrap();
+    info!("Board initialized");
 
-    let mut delay = cortex_m::delay::Delay::new(core.SYST, clocks.system_clock.freq().to_Hz());
+    let mut apin = board.pins.gpio25.into_push_pull_output();
 
-    let pins = hal::gpio::Pins::new(
-        pac.IO_BANK0,
-        pac.PADS_BANK0,
-        sio.gpio_bank0,
-        &mut pac.RESETS,
-    );
-
-    // This is the correct pin on the Raspberry Pico 2 board. On other boards, even if they have an
-    // on-board LED, it might need to be changed.
-    //
-    // Notably, on the Pico 2 W, the LED is not connected to any of the RP2350 GPIOs but to the cyw43 module instead.
-    // One way to do that is by using [embassy](https://github.com/embassy-rs/embassy/blob/main/examples/rp/src/bin/wifi_blinky.rs)
-    //
-    // If you have a Pico W and want to toggle a LED with a simple GPIO output pin, you can connect an external
-    // LED to one of the GPIO pins, and reference that pin here. Don't forget adding an appropriate resistor
-    // in series with the LED.
-    let mut led_pin = pins.gpio25.into_push_pull_output();
+    let mut delay = board.delay;
 
     loop {
-        info!("on!");
-        led_pin.set_high().unwrap();
+        info!("on");
+        apin.set_high().unwrap();
         delay.delay_ms(500);
-        info!("off!");
-        led_pin.set_low().unwrap();
+        info!("off");
+        apin.set_low().unwrap();
         delay.delay_ms(500);
     }
 }

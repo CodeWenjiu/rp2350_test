@@ -40,5 +40,7 @@ macro_rules! rp235x_binInit {
             hal::binary_info::rp_cargo_homepage_url!(),
             hal::binary_info::rp_program_build_attribute!(),
         ];
+
+        use hal::entry;
     };
 }

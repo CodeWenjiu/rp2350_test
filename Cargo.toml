@@ -1,6 +1,6 @@
 [workspace]
 members = [
-    "blink",
+    "blink", "boards",
     "macros"
 ]
 resolver = "2"
