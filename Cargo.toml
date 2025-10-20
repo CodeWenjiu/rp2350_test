@@ -1,7 +1,7 @@
 [workspace]
 members = [
     "blink",
-    "boards",
+    "boards", "dht11",
     "macros"
 ]
 resolver = "2"

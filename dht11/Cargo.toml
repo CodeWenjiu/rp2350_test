@@ -1,0 +1,21 @@
+[package]
+name = "dht11"
+version = "0.1.0"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+defmt = { workspace = true }
+defmt-rtt = { workspace = true }
+panic-probe = { workspace = true }
+rp235x-hal = { workspace = true }
+macros = { path = "../macros" }
+boards = { path = "../boards" }
+
+cortex-m = { workspace = true }
+cortex-m-rt = { workspace = true }
+embedded-hal = { workspace = true }
+embedded-alloc = { workspace = true }
+dht-sensor = "0.2.1"
+
+[build-dependencies]
