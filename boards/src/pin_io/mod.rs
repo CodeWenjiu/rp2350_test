@@ -1,4 +1,5 @@
 macros::rp235x_libInit!();
+macros::mod_pub!(iic);
 
 pub fn pin_init() -> hal::gpio::Pins {
     let mut pac = unsafe { hal::pac::Peripherals::steal() };

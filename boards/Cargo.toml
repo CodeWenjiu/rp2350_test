@@ -15,3 +15,5 @@ cortex-m = { workspace = true }
 cortex-m-rt = { workspace = true }
 embedded-hal = { workspace = true }
 embedded-alloc = { workspace = true }
+ssd1306 = "0.10.0"
+embedded-graphics = "0.8.1"

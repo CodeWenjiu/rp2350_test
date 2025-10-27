@@ -6,7 +6,7 @@
 
 macros::rp235x_binInit!();
 
-use boards::{clock_init, pin_init};
+use boards::{clock_init, pin_io::pin_init};
 use dht_sensor::{DhtReading, dht11};
 use embedded_hal::digital::StatefulOutputPin;
 
